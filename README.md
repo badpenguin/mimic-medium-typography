@@ -12,7 +12,7 @@ For more informations please vitis [Bad Penguin](http://www.badpenguin.org)
 
 ## Preview
 
-The above part is the mimic CSS. The below part is original medium.com's screenshot.
+The above part is the mimic CSS. The below part the is original medium.com's screenshot.
 
 ![Mimic vs Medium](img/mimic-preview.png)
 
