@@ -1,0 +1,27 @@
+@import "medium";
+
+.page-content {
+	margin: 40px auto;
+}
+
+.preview {
+	margin: 40px 0 20px 0;
+	padding: 20px 0 0 0;
+	border-top: dotted 1px #ddd;
+	width: 100%;
+	border-right: dotted 1px #ddd;
+
+	&.blockquote {
+		margin-left: -27px;
+	}
+	&.blockquote.alternate {
+		margin-left: 0;
+
+		img {
+			padding-left: 40px;
+		}
+
+	}
+
+
+}
