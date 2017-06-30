@@ -10,6 +10,13 @@ To use: just import medium.scss in your own projects.
 
 For more informations please vitis [Bad Penguin](http://www.badpenguin.org)
 
+## Preview
+
+The above part is the mimic CSS. The below part is original medium.com's screenshot.
+
+![Mimic vs Medium](img/mimic-preview.png)
+
 ## Credits
 
 - medium.com for creating such a wonderfull readable content
+
