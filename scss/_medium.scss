@@ -1,18 +1,33 @@
 /*
 mimic-medium-typograpy: A medium.com typographic experiment using different fonts.
 By Antonio Gallo - http://www.antoniogallo.it/
-Version: 2017-06-30
+Version: 2017-07-01
 */
 
 $serif-font-stack: 'PT Serif', Georgia, Cambria, "Times New Roman", Times, serif;
 $title-sans-font-stack: 'Source Sans Pro', "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif;
+$monospace-font-stack: Menlo, Monaco, "Courier New", Courier, monospace;
+$sans-font-stack: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
 
 
 @mixin font-antialias {
 	text-rendering: optimizeLegibility;
-	font-smoothing: antialiased;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	font-smoothing: antialiased;
+}
+
+
+// by https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
+@mixin word-wrap() {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	-ms-word-break: break-all;
+	word-break: break-word;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
 }
 
 
@@ -27,9 +42,10 @@ $title-sans-font-stack: 'Source Sans Pro', "Lucida Grande", "Lucida Sans Unicode
 }
 
 
-
 @mixin link-decoration {
 	text-decoration: none;
+
+	background-color: transparent;
 	background-image: linear-gradient(to bottom, rgba(0, 0, 0, .6) 50%, rgba(0, 0, 0, 0) 50%);
 	background-repeat: repeat-x;
 	background-size: 2px .1em;
@@ -38,15 +54,26 @@ $title-sans-font-stack: 'Source Sans Pro', "Lucida Grande", "Lucida Sans Unicode
 	outline: 0;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, .44);
 	color: inherit;
-	background-color: transparent;
 }
 
 
 // restore ui-kit em
-em {
+.uk-container em {
 	color: inherit;
 }
 
+
+body {
+	font-family: $sans-font-stack;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 18px;
+	line-height: 1.4;
+	color: rgba(0,0,0,.8);
+}
+
+
+// medium container is 700px + 20px padding/margin
 .page-content {
 	margin: 20px auto;
 	max-width: 700px;
@@ -56,94 +83,101 @@ em {
 }
 
 
+/* TITLES */
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: $title-sans-font-stack;
+	font-weight: 700;
+	font-style: normal;
+	@include font-antialias;
+	color: rgba(0, 0, 0, .8);
+	margin: 0;
+}
+
+
+h1 {
+	font-size: 39px;
+	line-height: 1.04;
+	letter-spacing: -.02em;
+}
+
+// Interpolated
+h2 {
+	font-size: 36px;
+	line-height: 1.095;
+	letter-spacing: -.035em;
+	margin-top: 56px;
+	@include word-wrap;
+}
+
+h3 {
+	font-size: 32px;
+	line-height: 1.15;
+	letter-spacing: -.02em;
+	margin-top: 56px;
+	@include word-wrap;
+}
+
+h4 {
+	font-size: 24px;    // 24px original
+	line-height: 1.22;
+	letter-spacing: -.02em;
+	margin-top: 39px;
+	@include word-wrap;
+	color: rgba(0,0,0,0.75);
+}
+
+// TODO: h5, h6
+
+p {
+	@include medium-paragraph;
+}
+
+b, strong {
+	font-weight: 700;
+}
+
+strong {
+	// make it a little lighter
+	color: rgba(0,0,0,0.75);
+}
+
+em {
+	-webkit-font-feature-settings: "liga" on, "salt" on;
+	font-feature-settings: "liga" on,"salt" on;
+	//color: inherit;
+}
+
+
 .page-content {
 
 	@include medium-paragraph;
 
 
-	h1, h2, h3, h4, h5, h6 {
-		font-family: $title-sans-font-stack;
-		font-weight: 700;
-		font-style: normal;
-		@include font-antialias;
-		color: rgba(0, 0, 0, .8);
-		margin: 0;
-	}
-
-
-	h1 {
-		font-size: 39px;
-		line-height: 1.04;
-		letter-spacing: -.02em;
-	}
-
-	// Interpolated
-	h2 {
-		font-size: 36px;
-		line-height: 1.095;
-		letter-spacing: -.035em;
-		margin-top: 56px;
-		word-wrap: break-word;
-	}
-
-	h3 {
-		font-size: 32px;
-		line-height: 1.15;
-		letter-spacing: -.02em;
-		margin-top: 56px;
-		word-wrap: break-word;
-	}
-
-	h4 {
-		font-size: 24px;    // 24px original
-		line-height: 1.22;
-		letter-spacing: -.02em;
-		margin-top: 39px;
-		word-wrap: break-word;
-		color: rgba(0,0,0,0.75);
-	}
-
-
 	p {
 		@include medium-paragraph;
+		@include word-wrap;
 		letter-spacing: .01rem;
 
 		margin-top: 29px;
 		margin-bottom: 0;
-
-		/*word-break: break-word;*/
-		word-wrap: break-word;
-
 	}
 
 	h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
 		margin-top: 8px;
 	}
 
-	b, strong {
-		font-weight: 700;
-	}
-	strong {
-		// make it a little lighter
-		color: rgba(0,0,0,0.75);
-	}
-
-	em {
-		-webkit-font-feature-settings: "liga" on, "salt" on;
-		font-feature-settings: "liga" on,"salt" on;
-		color: inherit;
-	}
 
 	a {
 		@include link-decoration;
-
+		@include word-wrap;
 		letter-spacing: -.003em;
-		word-wrap: break-word;
-
 	}
 
 	blockquote {
 		@include medium-paragraph;
+		@include word-wrap;
+
 		font-style: italic;
 		letter-spacing: -.01em;
 		margin-top: 29px;
@@ -152,8 +186,6 @@ em {
 		padding-left: 20px;
 		margin-left: -23px;
 		padding-bottom: 2px;
-
-		word-wrap: break-word;
 
 		/* TODO: replace with a font with weigth300 support */
 		&.alternate {
@@ -172,9 +204,6 @@ em {
 			padding-left: 50px;
 			text-align: left;
 
-			word-wrap: break-word;
-			font-weight: 300;
-
 			&.alternate strong {
 				font-weight: 400;
 			}
@@ -185,7 +214,8 @@ em {
 
 
 	pre, code {
-		font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+		font-family: $monospace-font-stack;
+		@include word-wrap;
 		font-size: 18px;
 		line-height: 1.58;
 		font-weight: 400;
@@ -198,12 +228,9 @@ em {
 		font-feature-settings: "liga" 0;
 
 		color: rgba(0, 0, 0, .8);
-
 		background: rgba(0, 0, 0, .05);
-
-		word-wrap: break-word;
-
 	}
+
 	pre {
 		letter-spacing: 0;
 		margin-top: 43px;
@@ -212,6 +239,7 @@ em {
 		white-space: pre-wrap;
 		overflow: auto;
 	}
+
 	code {
 		letter-spacing: -.003em;
 		margin: 0 2px;
